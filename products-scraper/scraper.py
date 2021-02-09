@@ -6,14 +6,14 @@ import pandas as pd
 import time
 import sqlite3
 import os
+from pathlib import Path
 
 # Checa se o db existe, caso não exista, cria o db e conecta. Se já existir, somente conecta no db
-if os.path.isfile(os.getcwd() + '/base_produtos.db'):
-    conn = sqlite3.connect(os.getcwd() + '/base_produtos.db')
+if os.path.isfile(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db'):
+    conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
 else:     
-    sqlite3.connect(os.getcwd() + '/base_produtos.db')
-    conn = sqlite3.connect(os.getcwd() + '/base_produtos.db')
-
+    sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
+    conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
 
 # Define a página inicial do site
 pagina_inicial = 'https://www.magazineluiza.com.br/'

@@ -1,6 +1,5 @@
 # Importa as bibliotecas
-import requests
-from bs4 import BeautifulSoup
+import requests 
 from lxml import html 
 import pandas as pd
 import time
@@ -9,11 +8,18 @@ import os
 from pathlib import Path
 
 # Checa se o db existe, caso não exista, cria o db e conecta. Se já existir, somente conecta no db
-if os.path.isfile(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db'):
-    conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
-else:     
-    sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
-    conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
+if os.name == 'posix':
+    if os.path.isfile(os.getcwd() + '/products-database/base_produtos.db'):
+        conn = sqlite3.connect(os.getcwd() + '/products-database/base_produtos.db')    
+    else: 
+        sqlite3.connect(os.getcwd() + '/products-database/base_produtos.db')    
+        conn = sqlite3.connect(os.getcwd() + '/products-database/base_produtos.db')    
+else: 
+    if os.path.isfile(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db'):
+        conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
+    else:     
+        sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
+        conn = sqlite3.connect(str(Path(os.getcwd()).parent) + '/products-database/base_produtos.db')
 
 # Define a página inicial do site
 pagina_inicial = 'https://www.magazineluiza.com.br/'
